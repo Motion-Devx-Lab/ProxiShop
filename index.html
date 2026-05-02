@@ -3,204 +3,68 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProxiShop - South African Retailer Price Comparison</title>
-    <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>ProxiShop | MotionDev Xlab</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div class="container">
-        <header class="header">
-            <h1>🛒 ProxiShop</h1>
-            <p>Find nearby stores and compare prices across South African retailers</p>
-        </header>
+    <header>
+        <div class="logo">🛒 ProxiShop</div>
+        <p>Your Personal SA Grocery Price Navigator</p>
+    </header>
 
-        <main class="main-content">
-            <!-- Location Section -->
-            <section class="location-section">
-                <div class="location-card">
-                    <h2>📍 Store Location</h2>
-                    
-                    <!-- Location Status (moved to top) -->
-                    <div id="locationStatus" class="location-status">
-                        Click to detect your location and find nearby stores
-                    </div>
-                    
-                    <!-- Location Controls -->
-                    <div class="location-controls">
-                        <div class="location-buttons">
-                            <button id="getLocationBtn" class="location-btn">
-                                📍 Detect My Location
-                            </button>
-                        </div>
-                        
-                        <div class="manual-location">
-                            <label for="manualLocation">Or enter coordinates:</label>
-                            <div class="manual-input-group">
-                                <input type="text" id="manualLocation" placeholder="e.g., -25.7479, 28.2293">
-                                <button id="setLocationBtn" class="location-btn">Set</button>
-                            </div>
-                        </div>
-                    </div>
-                    
-                    <!-- Nearby Stores -->
-                    <div id="nearbyStores" class="nearby-stores">
-                        <!-- Nearby stores will be displayed here -->
-                    </div>
+    <main class="container">
+        <!-- Location Section -->
+        <section class="card location-card">
+            <h3><i class="fas fa-map-marker-alt"></i> Store Location</h3>
+            <div id="location-status" class="status-box">
+                <i class="fas fa-sync-alt"></i> Waiting for location...
+            </div>
+            
+            <div class="manual-location">
+                <button id="detect-btn" class="detect-btn">Update Location</button>
+                <div class="coord-input">
+                    <span>Or enter coordinates:</span>
+                    <input type="text" id="manual-coords" placeholder="-25.4530, 28.6484">
+                    <button id="set-manual-btn" class="small-btn">Set</button>
                 </div>
-            </section>
+            </div>
 
-            <!-- Budget Section -->
-            <section class="budget-section">
-                <div class="budget-card">
-                    <h2>💰 Budget Management</h2>
-                    <div class="budget-input-group">
-                        <label for="totalBudget">Total Budget:</label>
-                        <input type="number" id="totalBudget" placeholder="Enter your budget" step="0.01" min="0">
-                    </div>
-                    <div class="budget-display">
-                        <div class="budget-item">
-                            <span>Total Budget:</span>
-                            <span id="totalBudgetDisplay">R0.00</span>
-                        </div>
-                        <div class="budget-item">
-                            <span>Spent:</span>
-                            <span id="spentAmount" class="spent">R0.00</span>
-                        </div>
-                        <div class="budget-item">
-                            <span>Remaining:</span>
-                            <span id="remainingAmount" class="remaining">R0.00</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <div class="store-grid" id="store-grid">
+                <!-- Stores cards will display distance here -->
+            </div>
+        </section>
 
-            <!-- Add Item Section -->
-            <section class="add-item-section">
-                <div class="add-item-card">
-                    <h2>➕ Add Shopping Item</h2>
-                    <div class="input-group">
-                        <input type="text" id="itemInput" placeholder="Enter item name (e.g., Milk, Bread, Apples)">
-                        <input type="number" id="quantityInput" placeholder="Qty" min="1" value="1">
-                        <button id="addItemBtn">Add Item</button>
-                    </div>
-                    <div class="paste-section">
-                        <p>Or paste multiple items (one per line):</p>
-                        <textarea id="pasteArea" placeholder="Paste your shopping list here..."></textarea>
-                        <button id="pasteBtn">Import List</button>
-                    </div>
-                </div>
-            </section>
+        <!-- Input Section -->
+        <section class="card input-card">
+            <h3><i class="fas fa-cart-plus"></i> Add Shopping Items</h3>
+            <div class="input-group">
+                <input type="text" id="item-input" placeholder="e.g. 10kg Maize Meal">
+                <input type="number" id="item-qty" value="1" min="1">
+                <button id="add-btn">Add Item</button>
+            </div>
+            
+            <div class="bulk-input" style="margin-top: 15px;">
+                <textarea id="bulk-items" placeholder="Or paste multiple items here (one per line)..." rows="3"></textarea>
+                <button id="bulk-btn" class="secondary-btn">Import List</button>
+            </div>
+        </section>
 
-            <!-- Shopping List Section -->
-            <section class="shopping-list-section">
-                <div class="list-card">
-                    <h2>📋 Shopping List</h2>
-                    <div id="shoppingList" class="shopping-list">
-                        <!-- Items will be added here dynamically -->
-                    </div>
-                    <div class="list-summary">
-                        <div class="summary-item">
-                            <span>Total Items:</span>
-                            <span id="totalItems">0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total Cost:</span>
-                            <span id="totalCost">R0.00</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
+        <!-- Results Section -->
+        <section class="card plan-card">
+            <h3><i class="fas fa-list-check"></i> Optimal Shopping Plan</h3>
+            <div id="plan-summary" class="summary-banner">
+                Add items to calculate your best route.
+            </div>
+            <div id="optimal-details">
+                <!-- Optimal breakdown injected here -->
+            </div>
+        </section>
+    </main>
 
-            <!-- Store Grouping Section -->
-            <section class="store-grouping-section">
-                <div class="store-grouping-card">
-                    <h2>🛍️ Optimal Shopping Plan</h2>
-                    <div id="storeGroups" class="store-groups">
-                        <!-- Store groups will be displayed here -->
-                    </div>
-                    <div class="shopping-summary">
-                        <div class="summary-item">
-                            <span>Total Stores to Visit:</span>
-                            <span id="totalStores">0</span>
-                        </div>
-                        <div class="summary-item">
-                            <span>Total Savings:</span>
-                            <span id="totalSavings">R0.00</span>
-                        </div>
-                    </div>
-                </div>
-            </section>
-
-            <!-- Price Comparison Section -->
-            <section class="comparison-section">
-                <div class="comparison-card">
-                    <h2>🏪 Price Comparison</h2>
-                    <div class="retailers-grid">
-                        <div class="retailer-card" data-retailer="shoprite">
-                            <div class="retailer-header">
-                                <h3>Shoprite</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                        <div class="retailer-card" data-retailer="spar">
-                            <div class="retailer-header">
-                                <h3>Spar</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                        <div class="retailer-card" data-retailer="checkers">
-                            <div class="retailer-header">
-                                <h3>Checkers</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                        <div class="retailer-card" data-retailer="usave">
-                            <div class="retailer-header">
-                                <h3>Usave</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                        <div class="retailer-card" data-retailer="woolworths">
-                            <div class="retailer-header">
-                                <h3>Woolworths</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                        <div class="retailer-card" data-retailer="roots">
-                            <div class="retailer-header">
-                                <h3>Roots</h3>
-                                <span class="retailer-distance">-- km</span>
-                                <span class="retailer-total">R0.00</span>
-                            </div>
-                            <div class="retailer-items"></div>
-                            <div class="retailer-specials"></div>
-                        </div>
-                    </div>
-                    <div class="best-deal">
-                        <h3>🏆 Best Deal</h3>
-                        <div id="bestDealInfo">
-                            <p>Add items to see the best deal!</p>
-                        </div>
-                    </div>
-                </div>
-            </section>
-        </main>
-    </div>
+    <footer>
+        <p>&copy; 2026 MotionDev Xlab. All Rights Reserved.</p>
+    </footer>
 
     <script src="script.js"></script>
 </body>
