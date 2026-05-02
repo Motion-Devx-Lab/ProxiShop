@@ -201,3 +201,62 @@ textarea {
 /* Specific highlight colors requested */
 .price-tag.best { background-color: #2ecc71; color: white; padding: 2px 6px; border-radius: 4px; }
 .price-tag.expensive { background-color: #e74c3c; color: white; padding: 2px 6px; border-radius: 4px; }
+
+/* --- Mobile Optimization (Under 600px) --- */
+@media (max-width: 600px) {
+    .container {
+        padding: 10px;
+        margin: 0;
+    }
+
+    .logo {
+        font-size: 1.8rem; /* Scaled down for smaller screens */
+    }
+
+    /* Stack input fields vertically for easier typing */
+    .input-group {
+        flex-direction: column;
+    }
+
+    #item-qty {
+        width: 100%; /* Full width for better touch target */
+    }
+
+    button {
+        width: 100%;
+        padding: 15px; /* Larger hit area for thumbs */
+        font-size: 1rem;
+    }
+
+    /* Store grid becomes a single column scroll */
+    .store-grid {
+        grid-template-columns: 1fr;
+        gap: 10px;
+    }
+
+    .store-header {
+        padding: 1.2rem; /* Easier to tap dropdowns */
+    }
+}
+
+/* --- Tablet Optimization (601px to 1024px) --- */
+@media (min-width: 601px) and (max-width: 1024px) {
+    .container {
+        max-width: 90%;
+    }
+
+    .store-grid {
+        grid-template-columns: repeat(2, 1fr); /* Two columns for iPad/Tablets */
+    }
+}
+
+/* Base style improvements for mobile feel */
+body {
+    -webkit-tap-highlight-color: transparent; /* Removes blue flash on iPhone tap */
+    scroll-behavior: smooth;
+}
+
+.card {
+    border-radius: 12px; /* Slightly softer corners for mobile UI */
+    margin-bottom: 1rem;
+}

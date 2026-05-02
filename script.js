@@ -165,5 +165,16 @@ function renderPlan(plan) {
 
 function toggleDropdown(element) {
     const list = element.nextElementSibling;
-    list.style.display = list.style.display === "block" ? "none" : "block";
+    const isOpening = list.style.display !== "block";
+    
+    // Close all other open lists first (Accordion style) for mobile clarity
+    document.querySelectorAll('.item-list').forEach(el => el.style.display = 'none');
+    
+    if (isOpening) {
+        list.style.display = "block";
+        // Smoothly scroll the expanded store into view on small screens
+        if (window.innerWidth < 600) {
+            element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
 }

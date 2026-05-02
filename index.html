@@ -2,18 +2,17 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ProxiShop | MotionDev Xlab</title>
+    <!-- Critical for mobile scaling and iPhone responsiveness -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>ProxiShop Mobile | MotionDev Xlab</title>
     <link rel="stylesheet" href="style.css">
-    <script src="https://kit.fontawesome.com/your-code.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <header>
+    <header class="mobile-header">
         <div class="logo">🛒 ProxiShop</div>
-        <p>Your Personal SA Grocery Price Navigator</p>
     </header>
 
-    <main class="container">
+    <div class="container mobile-padding">
         <!-- Location Section -->
         <section class="card location-card">
             <h3><i class="fas fa-map-marker-alt"></i> Store Location</h3>
@@ -60,11 +59,7 @@
                 <!-- Optimal breakdown injected here -->
             </div>
         </section>
-    </main>
-
-    <footer>
-        <p>&copy; 2026 MotionDev Xlab. All Rights Reserved.</p>
-    </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
